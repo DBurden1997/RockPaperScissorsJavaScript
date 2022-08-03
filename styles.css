@@ -1,11 +1,11 @@
 
 :root {
     --color-primary: #e7d96f;
-    --color-light: #f1f7f6;
-    --color-accent: #ddc9ac;
+    --color-light: hsl(170, 27%, 96%);
+    --color-accent: #f1e9de;
     --color-dark-offset: #14203b;
     --color-dark: #0a0e20;
-    --color-dark-accent: #623b1c;
+    --color-dark-accent: #3a4b66;
 
     --color-success: #5de95d;
     --color-error: #f44a4a;
@@ -20,9 +20,14 @@ body {
 body {
     background-color: var(--color-dark);
     color: var(--color-light);
+    font-family: Arial, Helvetica, sans-serif;
 
     display: flex;
     flex-direction: column;
+}
+
+#header {
+    color: var(--color-primary);
 }
 
 #content {
@@ -63,9 +68,16 @@ body {
 }
 
 .modal {
+    background-color: var(--color-dark-accent);
+    color: var(--color-primary);
+    
     position: absolute;
     top: 50%;
     left: 50%;
+    width: 50%;
+
+    padding: 32px;
+
     transform: translate(-50%, -50%) scale(0%);
     transition: transform 0.2s;
 }

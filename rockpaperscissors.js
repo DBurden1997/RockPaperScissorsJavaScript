@@ -98,20 +98,71 @@ function getComputerChoice() {
     }
 }
 
+function showModal(text) {
+    let resultModal = document.querySelector(`#result-modal`);
+    resultModal.querySelector(`#result-modal-text`).textContent = text;
+    resultModal.classList.add(`active`);
+}
+
+function closeModal() {
+    let resultModal = document.querySelector(`#result-modal`);
+    resultModal.classList.remove(`active`);
+}
+
+function checkForVictory(wins, losses, draws) {
+    let result = 0;
+
+    if(wins >= 5) {
+        result = 1;
+    }
+    if(losses >= 5) {
+        result = -1;
+    }
+
+    if(!result) {
+        return;
+    }
+
+
+    showModal(`The Game Results Are: ${wins} Wins - ${losses} Losses - ${draws} Draws`);
+}
+
 function updateResultsTally(result) {
+    let lossCounterNode = document.querySelector(`#loss-counter`);
+    let losses = +(lossCounterNode.textContent);
+
+    let winCounterNode = document.querySelector(`#win-counter`);
+    let wins = +(winCounterNode.textContent);
+
+    let drawCounterNode = document.querySelector(`#draw-counter`);
+    let draws = +(drawCounterNode.textContent);
+
     if(result < 0) {
-        let lossCounterNode = document.querySelector(`#loss-counter`)
-        let losses = +(lossCounterNode.textContent);
         lossCounterNode.textContent = ++losses;
     } else if(result > 0) {
-        let winCounterNode = document.querySelector(`#win-counter`)
-        let wins = +(winCounterNode.textContent);
         winCounterNode.textContent = ++wins;
     } else {
-        let drawCounterNode = document.querySelector(`#draw-counter`)
-        let draws = +(drawCounterNode.textContent);
         drawCounterNode.textContent = ++draws;
     }
+
+    checkForVictory(wins, losses, draws);
+}
+function resetResultsTally() {
+
+    let lossCounterNode = document.querySelector(`#loss-counter`);
+
+    let winCounterNode = document.querySelector(`#win-counter`);
+
+    let drawCounterNode = document.querySelector(`#draw-counter`);
+
+    lossCounterNode.textContent = 0;
+    winCounterNode.textContent = 0;
+    drawCounterNode.textContent = 0;
+} 
+
+function resetGame() {
+    resetResultsTally();
+    closeModal();
 }
 
 function clickChoiceButton(e) {
@@ -121,16 +172,8 @@ function clickChoiceButton(e) {
     updateResultsTally(playRound(playerChoice, computerChoice));
 }
 
-let buttons = document.querySelectorAll(`button`);
+let buttons = document.querySelectorAll(`.choice-button`);
 buttons.forEach(button => button.addEventListener('click', clickChoiceButton));
 
-// function game() {
-
-//     for(let i = 0; i < 5; ++i) {
-//         let playerChoice = prompt('Rock, Paper or Scissors?', 'Rock');
-//         let computerChoice = getComputerChoice();
-        
-//     }
-
-//     console.log(`The Game Results Are: ${wins} Wins - ${losses} Losses - ${draws} Draws`);
-// }
+let modalButton = document.querySelector('#retry');
+modalButton.addEventListener('click', resetGame);
