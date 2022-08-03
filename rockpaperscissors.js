@@ -64,8 +64,12 @@ function getResultMessage(first, second) {
     return `It's a draw! You both selected ${first}`;
 }
 
-function updateRoundResultText(text) {
-    document.querySelector("#round-result").textContent = text;
+function updateRoundResultText(playerChoice, computerChoice) {
+    let resultText = getResultMessage(playerChoice, computerChoice);
+
+    document.querySelector("#player-choice").textContent = `You Selected ${playerChoice}`;
+    document.querySelector("#computer-choice").textContent = `Computer Selected ${computerChoice}`;
+    document.querySelector("#round-result-text").textContent = resultText;
 }
 
 function playRound(playerChoice, computerChoice) {
@@ -78,7 +82,7 @@ function playRound(playerChoice, computerChoice) {
     console.log(`You selected ${finalPlayerChoice}`);
     console.log(`The computer selected ${computerChoice}`);
     
-    updateRoundResultText(getResultMessage(finalPlayerChoice, computerChoice));
+    updateRoundResultText(finalPlayerChoice, computerChoice);
     return compareChoices(finalPlayerChoice, computerChoice);
 }
 
