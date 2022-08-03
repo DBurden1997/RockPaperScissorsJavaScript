@@ -94,25 +94,35 @@ function playRound(playerChoice, computerChoice) {
     return compareChoices(finalPlayerChoice, computerChoice);
 }
 
-function game() {
-    let wins = 0;
-    let losses = 0;
-    let draws = 0;
+function clickChoiceButton(e) {
+    let computerChoice = getComputerChoice();
+    let playerChoice = e.target.id;
 
-    for(let i = 0; i < 5; ++i) {
-        let playerChoice = prompt('Rock, Paper or Scissors?', 'Rock');
-        let computerChoice = getComputerChoice();
-        
-        let result = playRound(playerChoice, computerChoice);
-        
-        if(result < 0) {
-            losses++;
-        } else if(result > 0) {
-            wins++;
-        } else {
-            draws++;
-        }
-    }
-
-    console.log(`The Game Results Are: ${wins} Wins - ${losses} Losses - ${draws} Draws`);
+    playRound(playerChoice, computerChoice);
 }
+
+let buttons = document.querySelectorAll(`button`);
+buttons.forEach(button => button.addEventListener('click', clickChoiceButton));
+
+// function game() {
+//     let wins = 0;
+//     let losses = 0;
+//     let draws = 0;
+
+//     for(let i = 0; i < 5; ++i) {
+//         let playerChoice = prompt('Rock, Paper or Scissors?', 'Rock');
+//         let computerChoice = getComputerChoice();
+        
+//         let result = playRound(playerChoice, computerChoice);
+        
+//         if(result < 0) {
+//             losses++;
+//         } else if(result > 0) {
+//             wins++;
+//         } else {
+//             draws++;
+//         }
+//     }
+
+//     console.log(`The Game Results Are: ${wins} Wins - ${losses} Losses - ${draws} Draws`);
+// }

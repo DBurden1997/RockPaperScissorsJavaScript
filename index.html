@@ -5,9 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./rockpaperscissors.js"></script>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./rockpaperscissors.js" defer></script>
 </head>
 <body>
-    
+    <div id="header" class="section">
+
+    </div>
+    <div id="content" class="section">
+        <div id="button-container">
+            <button id="Rock" class="choice-button">Rock</button>
+            <button id="Paper" class="choice-button">Paper</button>
+            <button id="Scissors" class="choice-button">Scissors</button>
+        </div>
+    </div>
+    <div id="footer" class="section">
+        Copyright <span class="copyright">©</span> Dylan Burden 2022
+        <a href="https://github.com/DBurden1997" target="_blank">
+            <img class="github-mark" alt="Github Icon" src="./images/GitHub-Mark-Light-32px.png"></i>
+        </a>
+    </div>
+    <div id="result-modal" class="modal">
+        Here is a result!
+        <button id="retry">Play Again</button>
+    </div>
 </body>
 </html>
