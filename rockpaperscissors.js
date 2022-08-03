@@ -64,6 +64,24 @@ function getResultMessage(first, second) {
     return `It's a draw! You both selected ${first}`;
 }
 
+function updateRoundResultText(text) {
+    document.querySelector("#round-result").textContent = text;
+}
+
+function playRound(playerChoice, computerChoice) {
+    let finalPlayerChoice = capitalize(playerChoice);
+
+    if(!(finalPlayerChoice == 'Rock' || finalPlayerChoice == 'Paper' || finalPlayerChoice == 'Scissors')) {
+        finalPlayerChoice = 'Rock';
+    }
+
+    console.log(`You selected ${finalPlayerChoice}`);
+    console.log(`The computer selected ${computerChoice}`);
+    
+    updateRoundResultText(getResultMessage(finalPlayerChoice, computerChoice));
+    return compareChoices(finalPlayerChoice, computerChoice);
+}
+
 function getComputerChoice() {
     let i = getRandomNum(3);
 
@@ -80,48 +98,38 @@ function getComputerChoice() {
     }
 }
 
-function playRound(playerChoice, computerChoice) {
-    let finalPlayerChoice = capitalize(playerChoice);
-
-    if(!(finalPlayerChoice == 'Rock' || finalPlayerChoice == 'Paper' || finalPlayerChoice == 'Scissors')) {
-        finalPlayerChoice = 'Rock';
+function updateResultsTally(result) {
+    if(result < 0) {
+        let lossCounterNode = document.querySelector(`#loss-counter`)
+        let losses = +(lossCounterNode.textContent);
+        lossCounterNode.textContent = ++losses;
+    } else if(result > 0) {
+        let winCounterNode = document.querySelector(`#win-counter`)
+        let wins = +(winCounterNode.textContent);
+        winCounterNode.textContent = ++wins;
+    } else {
+        let drawCounterNode = document.querySelector(`#draw-counter`)
+        let draws = +(drawCounterNode.textContent);
+        drawCounterNode.textContent = ++draws;
     }
-
-    console.log(`You selected ${finalPlayerChoice}`);
-    console.log(`The computer selected ${computerChoice}`);
-    
-    console.log(getResultMessage(finalPlayerChoice, computerChoice));
-    return compareChoices(finalPlayerChoice, computerChoice);
 }
 
 function clickChoiceButton(e) {
     let computerChoice = getComputerChoice();
     let playerChoice = e.target.id;
 
-    playRound(playerChoice, computerChoice);
+    updateResultsTally(playRound(playerChoice, computerChoice));
 }
 
 let buttons = document.querySelectorAll(`button`);
 buttons.forEach(button => button.addEventListener('click', clickChoiceButton));
 
 // function game() {
-//     let wins = 0;
-//     let losses = 0;
-//     let draws = 0;
 
 //     for(let i = 0; i < 5; ++i) {
 //         let playerChoice = prompt('Rock, Paper or Scissors?', 'Rock');
 //         let computerChoice = getComputerChoice();
         
-//         let result = playRound(playerChoice, computerChoice);
-        
-//         if(result < 0) {
-//             losses++;
-//         } else if(result > 0) {
-//             wins++;
-//         } else {
-//             draws++;
-//         }
 //     }
 
 //     console.log(`The Game Results Are: ${wins} Wins - ${losses} Losses - ${draws} Draws`);
