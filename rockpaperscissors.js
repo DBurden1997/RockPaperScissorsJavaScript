@@ -7,7 +7,7 @@ function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
-function compareChoice(first, second) {
+function compareChoices(first, second) {
     switch(first) {
         case 'Rock': {
             switch(second) {
@@ -51,8 +51,8 @@ function compareChoice(first, second) {
     }
 }
 
-function getResult(first, second) {
-    let resultNum = compareChoice(first, second);
+function getResultMessage(first, second) {
+    let resultNum = compareChoices(first, second);
 
     if(resultNum > 0) {
         return `You win! ${first} beats ${second}`;
@@ -90,8 +90,8 @@ function playRound(playerChoice, computerChoice) {
     console.log(`You selected ${finalPlayerChoice}`);
     console.log(`The computer selected ${computerChoice}`);
     
-    console.log(getResult(finalPlayerChoice, computerChoice));
-    return compareChoice(finalPlayerChoice, computerChoice);
+    console.log(getResultMessage(finalPlayerChoice, computerChoice));
+    return compareChoices(finalPlayerChoice, computerChoice);
 }
 
 function game() {
